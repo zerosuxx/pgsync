@@ -178,7 +178,7 @@ TRANSFORM_TYPES = [
 # default postgres schema
 DEFAULT_SCHEMA = "public"
 
-BUILTIN_SCHEMAS = ["information_schema"]
+BUILTIN_SCHEMAS = ["information_schema", "google_vacuum_mgmt"]
 
 # Primary key identifier
 META = "_meta"
