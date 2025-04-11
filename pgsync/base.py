@@ -1035,6 +1035,8 @@ def _pg_engine(
             )
         connect_args["sslrootcert"] = sslrootcert
 
+    connect_args["options"] = "-c tcp_keepalives_idle=30 -c tcp_keepalives_interval=10 -c tcp_keepalives_count=5"
+    
     url: str = get_postgres_url(
         database,
         user=user,
@@ -1042,7 +1044,7 @@ def _pg_engine(
         password=password,
         port=port,
     )
-    return sa.create_engine(url, echo=echo, connect_args=connect_args)
+    return sa.create_engine(url, echo=echo, connect_args=connect_args, pool_pre_ping=True)
 
 
 def pg_execute(
