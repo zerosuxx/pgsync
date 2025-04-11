@@ -1119,6 +1119,7 @@ class Sync(Base, metaclass=Singleton):
                 continue
 
             try:
+                cursor.execute("SELECT 1")
                 conn.poll()
             except OperationalError as e:
                 logger.fatal(f"OperationalError: {e}")
@@ -1148,6 +1149,8 @@ class Sync(Base, metaclass=Singleton):
         Receive a notification message from the channel we are listening on
         """
         try:
+            cursor = self.conn.cursor()
+            cursor.execute("SELECT 1")
             self.conn.poll()
         except OperationalError as e:
             logger.fatal(f"OperationalError: {e}")
