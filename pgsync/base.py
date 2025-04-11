@@ -1044,7 +1044,7 @@ def _pg_engine(
         password=password,
         port=port,
     )
-    return sa.create_engine(url, echo=echo, connect_args=connect_args, pool_pre_ping=True)
+    return sa.create_engine(url, echo=echo, connect_args=connect_args, pool_recycle=40, pool_pre_ping=True)
 
 
 def pg_execute(
