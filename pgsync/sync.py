@@ -406,10 +406,10 @@ class Sync(Base, metaclass=Singleton):
                 try:
                     payload: Payload = self.parse_logical_slot(row.data)
                 except Exception as e:
-                    logger.exception(
+                    logger.warning(
                         f"Error parsing row: {e}\nRow data: {row.data}"
                     )
-                    raise
+                    continue
 
                 # filter out unknown schemas
                 if payload.schema not in self.tree.schemas:
@@ -424,10 +424,10 @@ class Sync(Base, metaclass=Singleton):
                             rows[j].data
                         )
                     except Exception as e:
-                        logger.exception(
+                        logger.warning(
                             f"Error parsing row: {e}\nRow data: {rows[j].data}"
                         )
-                        raise
+                        continue
 
                     if (
                         payload.tg_op != payload2.tg_op
